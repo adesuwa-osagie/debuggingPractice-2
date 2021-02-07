@@ -72,7 +72,7 @@ step 5) Still getting strange results? consider console.log.
 
   function concatMe(name) {
     var message = name;
-    message + ', hello';
+    message += ', hello'; //missing =
     return message;
   }
 
@@ -91,7 +91,15 @@ step 5) Still getting strange results? consider console.log.
 //given a string, should return the rest of the string from the where the character is first found
 
 function restOfStr(str, char) {
-  var indexOf = char;
+  // var indexOf = char; Need a for loop
+  var indexOf;
+
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === char){
+      indexOf = i;
+    }
+  }
+
   var restOfStr = str.slice(indexOf);
   return restOfStr;
 }
@@ -99,7 +107,7 @@ function restOfStr(str, char) {
 var str1 = 'hello';
 var char1 = 'e';
 
-//console.log('basic2: ', restOfChar(str1, char1)); //==> 'ello' 
+console.log('basic2: ', restOfStr(str1, char1)); //==> 'ello' 
 
 
 
@@ -111,15 +119,22 @@ var char1 = 'e';
 //should replace the first letter of str with char
 
 function replaceChar(str, char) {
-  var res = str;
-  res[0] = char;
+  // var res = str;
+  // res[0] = char;//cannot do this because strings are immutable
+
+  var res = char;
+
+  for(let i = 1; i < str.length; i++) {
+    res += str[i];
+  }
+
   return res;
 }
 
 var testStr = 'jellow';
 var testChar = 'm';
 
-// console.log('basic3: ', replaceChar(testStr, testChar)); // ==> 'mellow'
+console.log('basic3: ', replaceChar(testStr, testChar)); // ==> 'mellow'
 
 
 
@@ -129,17 +144,20 @@ var testChar = 'm';
 
 //***basic 4 ****
 //should combine the second part of str1 from index on to the beginning of str2 up to and including the index
-
+//slice (including, excluding)
+  //NEED to add one to index for str2
 
 function combineStr(str1, str2, index) {
   var beginning = str1.slice(index);
-  var end = str2.slice(1, index);
+  // var end = str2.slice(1, index);
+  var end = str2.slice(0, index + 1);
+
   return beginning + end;    
 }
 
-// console.log('basic4a: ', combineStr('telemed', 'icinemedia', 4)); //==> 'medicine'
+console.log('basic4a: ', combineStr('telemed', 'icinemedia', 4)); //==> 'medicine'
 
-// console.log('basic4b: ', combineStr('sisgeogr', 'aphyhobb', 3 )); //=> 'geography'
+console.log('basic4b: ', combineStr('sisgeogr', 'aphyhobb', 3 )); //=> 'geography'
 
 
 
@@ -168,13 +186,18 @@ function combineStr(str1, str2, index) {
 function doubleChar(str) {
   var answer = '';
   for(var i = 0; i < str.length; i ++){
-    answer.push(str[i]);
-    answer.push(str[i]);
+    // answer.push(str[i]);
+    // answer.push(str[i]);
+    //Cannot do because answer is a string and push works for arrays
+
+    answer+= str[i];
+    answer+= str[i];
+
   }
   return answer;
 }
 
-// console.log(doubleChar("Hello World!")); //==> HHeelllloo  WWoorrlldd!!"
+console.log(doubleChar("Hello World!")); //==> HHeelllloo  WWoorrlldd!!"
 
 
 
