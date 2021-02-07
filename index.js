@@ -226,8 +226,14 @@ var testObj2 = {
 
 
 function addProperty(obj, key, val) {
-  if (obj['key'] === undefined) {
-    obj.key = val;
+  //Original: The problem was looking for a key called "key" 
+  // if (obj['key'] === undefined) {
+  //   obj.key = val;
+  // } 
+  // return obj;
+
+    if (obj[key] === undefined) {
+    obj[key] = val;
   } 
   return obj;
 }
@@ -239,9 +245,9 @@ var expected1 = { a: 'bee', c: 'deli', f: 'guard', m: 'night'};
 var actual2 = addProperty(testObj2, 'f', 'gorilla');
 var expected2 = { a: 'bee', c: 'deli', f: 'guard'};
 
-//console.log('basic 6a: ', assertObj(actual1, expected1)); 
+console.log('basic 6a: ', assertObj(actual1, expected1)); 
 
-//console.log('basic6b:', assertObj(actual2, expected2)); 
+console.log('basic6b:', assertObj(actual2, expected2)); 
 
 //assertObj: this works! Don't debug the assert function (all assert functions will work properly)
 
@@ -280,17 +286,27 @@ var accessArr = [
 
 
 function findIndex(arr, key){
-  var index = 0;
+  // var index = 0;//should be assigned to -1 in case the key does not exist
+  // for (var i = 0; i < arr.length; i ++) {
+  //   if (arr[i].key) { //looking for a key actually called "key"; need to use bracket notation
+  //     break;
+  //   }
+  //   index = i;//wrong spot
+  // }
+  // return index;
+
+  var index = -1;
   for (var i = 0; i < arr.length; i ++) {
-    if (arr[i].key) {
+    if (arr[i][key]) {
+      index = i;
       break;
     }
-    index = i;
+    
   }
   return index;
 }
 
-//console.log('basic 7: ', findIndex(accessArr, 'weird')); //==> 2
+console.log('basic 7: ', findIndex(accessArr, 'weird')); //==> 2
 
 
 
@@ -321,14 +337,14 @@ var arrOfKeys2 = ['key2', 'key1', 'key4', 'key3', 'key6', 'key5', 'key8', 'key7'
 
 function findValues(obj, arr) {
   var str = '';
-  for (var i = 0; i < arr.length; i ++) {
-    str + obj[arr[i]];
+  for (var i = 0; i < arr.length; i +=2) {
+    str += obj[arr[i]];
   }
   return str;
 }
 
-//console.log('basic 8a: ', findValues(objOfStr, arrOfKeys1)); //==> 'My dog loves bones.'
-//console.log('basic 8b: ', findValues(objOfStr, arrOfKeys2)); //==> 'You are a wonderful person.'
+console.log('basic 8a: ', findValues(objOfStr, arrOfKeys1)); //==> 'My dog loves bones.'
+console.log('basic 8b: ', findValues(objOfStr, arrOfKeys2)); //==> 'You are a wonderful person.'
 
 //console.log('basic 8: ', )
 
@@ -354,11 +370,25 @@ var wordArr = [
 ]
 
 function indexes(arr, char) {
+  // var indexOfChar = [];
+  // var ind = arr[i].indexOf(char);//wrong spot
+  // for (var i = 0; i < arr; i ++) { //missing the length
+  //   if (ind !== -1) {
+  //     indexOfChar.push(arr[i][ind])
+  //   } else {
+  //     indexOfChar.push('none');
+  //   }
+  // }
+  // return indexOfChar;
+
   var indexOfChar = [];
-  var ind = arr[i].indexOf(char);
-  for (var i = 0; i < arr; i ++) {
+
+
+  for (var i = 0; i < arr.length; i ++) {
+    var ind = arr[i].indexOf(char);
+   
     if (ind !== -1) {
-      indexOfChar.push(arr[i][ind])
+      indexOfChar.push(ind)
     } else {
       indexOfChar.push('none');
     }
@@ -367,7 +397,7 @@ function indexes(arr, char) {
 }
 
 
-// actualInd1 = indexes(wordArr, 'a');
+actualInd1 = indexes(wordArr, 'a');
 // expectedInd1 = [0, 1, 'none', 'none', 'none', 1];
 
 // actualInd2 = indexes(wordArr, 'e');
