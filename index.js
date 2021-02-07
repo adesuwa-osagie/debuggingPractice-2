@@ -611,31 +611,51 @@ Good luck on these last few!
 
 var stoneSkips = [{stone1: 1}, {stone2: 1}, {stone1: 'plop' }, {stone2: 2}, {stone2: 'plop'}];
 
-
-
 var stoneSkips2 = [{stone1:'plop'}, {stone2:'plop'}];
 
 var stoneSkips3 =  [{stone1: 1}, {stone2: 1}, {stone2: 2}, {stone2: 'plop'},{stone1: 2}, {stone1: 3}, {stone1: 'plop'}];
 
 function skippingStones(arr) {
 
-  if (arr.length < 2) {
+  // if (arr.length < 2) { //missing =
+  //   return ['tie', 0];
+  // }
+
+  // var countSkips = 0;
+  // var stone = 'stone1';
+
+  // for (var i = 0; i < arr.length; i ++) {
+    //the value should NOT equal 'plop'
+  //   if (arr[i].stone1 && arr[i].stone1 === 'plop') {
+  //     stone = 'stone1';
+  //     countSkips = arr[i].stone1;
+  //   } else if (arr[i].stone2 && arr[i].stone2 === 'plop') {
+  //     stone = 'stone2';
+  //     countSkips = arr[i].stone2;
+  //   }
+  // }
+
+  if (arr.length <= 2) {
     return ['tie', 0];
   }
 
   var countSkips = 0;
   var stone = 'stone1';
 
+  
+
   for (var i = 0; i < arr.length; i ++) {
-    if (arr[i].stone1 && arr[i].stone1 === 'plop') {
-      stone = 'stone1';
+    if (arr[i].stone1 && arr[i].stone1 !== 'plop') {
+      stone = 'stone1',
       countSkips = arr[i].stone1;
-    } else if (arr[i].stone2 && arr[i].stone2 === 'plop') {
+      
+    } else if (arr[i].stone2 && arr[i].stone2 !== 'plop') {
       stone = 'stone2';
       countSkips = arr[i].stone2;
     }
+    
   }
-  
+ 
   return [stone, countSkips];
 }
 
@@ -654,11 +674,11 @@ var assertStones = function (actual, expected) {
   return JSON.stringify(actual) === JSON.stringify(expected);
 }
 
-// console.log('intermediat 2a: ', assertStones(actualStones, expectedStones));
+console.log('intermediat 2a: ', assertStones(actualStones, expectedStones));
 
-// console.log('intermediat 2b: ', assertStones(actualStones2, expectedStones2));
+console.log('intermediat 2b: ', assertStones(actualStones2, expectedStones2));
 
-// console.log('intermediate 2c: ', assertStones(actualStones3, expectedStones3))
+console.log('intermediate 2c: ', assertStones(actualStones3, expectedStones3))
 
 
 //----------------------------
@@ -691,31 +711,41 @@ var assertStones = function (actual, expected) {
 // countBoomerangs([4, 4, 4, 9, 9, 9, 9]) ➞ 0
 
 function countBoomerangs(arr) {
-	let count;
-	for (let i = 0; i < arr.length ; i +=2) {
-		if (arr[i] = arr[i + 2] && arr[i + 1] !== arr[i]) {
+	// let count;
+	// for (let i = 0; i < arr.length ; i +=2) {
+      //you want to increment by one NOT 2 to account for overlaps
+      //there should be () around each condition
+	// 	if (arr[i] = arr[i + 2] && arr[i + 1] !== arr[i]) {
+	// 		count ++;
+	// 	}
+	// }
+
+	let count = 0;
+	for (let i = 0; i < arr.length ; i ++) {
+		if ((arr[i] === arr[i + 2]) && (arr[i + 1] !== arr[i])) {
 			count ++;
 		}
 	}
+  console.log('count: ', count)
 	return count;
 }
 
-// var assertEqual = function(actual, expected) {
-//   if(actual === expected) {
-//     return 'passed';
-//   } else {
-//     return 'failed';
-//   }
-// }
+var assertEqual = function(actual, expected) {
+  if(actual === expected) {
+    return 'passed';
+  } else {
+    return 'failed';
+  }
+}
 
-// var actual1 = countBoomerangs([9, 5, 9, 5, 1, 1, 1]);
-// var expected1 = 2;
+var actual1 = countBoomerangs([9, 5, 9, 5, 1, 1, 1]);
+var expected1 = 2;
 
-// var actual2 = countBoomerangs([5, 6, 6, 7, 6, 3, 9]);
-// var expected2 = 1;
+var actual2 = countBoomerangs([5, 6, 6, 7, 6, 3, 9]);
+var expected2 = 1;
 
-// console.log('assert1: ', assertEqual(actual1, expected1));
-// console.log('assert2: ', assertEqual(actual2, expected2));
+console.log('assert1: ', assertEqual(actual1, expected1));
+console.log('assert2: ', assertEqual(actual2, expected2));
 
 //-------------------------
 
