@@ -374,7 +374,7 @@ function indexes(arr, char) {
   // var ind = arr[i].indexOf(char);//wrong spot
   // for (var i = 0; i < arr; i ++) { //missing the length
   //   if (ind !== -1) {
-  //     indexOfChar.push(arr[i][ind])
+  //     indexOfChar.push(arr[i][ind])//need to push just the ind 
   //   } else {
   //     indexOfChar.push('none');
   //   }
@@ -471,19 +471,34 @@ if you don't know the concept, you can find information on MDN. It's very handy,
 */
 
 function evenOddTransform(arr, n) {
-	for (var i = 0; i < arr; i ++) {
+	// for (var i = 0; i < arr; i ++) {//missing length
+	// 	for (var y = 0; y < n; y ++) {
+			
+  //     if (!(arr[i] % 2)) {
+	// 			arr[i] - 2; // missing =
+        
+	// 		} else {
+	// 			arr[i] + 2;// missing = 
+	// 		}
+	// 	}
+	// }
+	// return arr;
+
+	for (var i = 0; i < arr.length; i ++) {
 		for (var y = 0; y < n; y ++) {
-			if (!(arr[i] % 2)) {
-				arr[i] - 2;
+
+      if (!(arr[i] % 2)) { //Remember: 0 is a falsey so use the ! to make it "true" that it is an even number
+				arr[i] -= 2;
+        
 			} else {
-				arr[i] + 2;
+				arr[i] += 2;
 			}
 		}
 	}
 	return arr;
 }
 
-// console.log('evendOddTransform1: ', evenOddTransform([0, 0, 0], 10)); //==> [-20, -20, -20]
+console.log('evendOddTransform1: ', evenOddTransform([0, 0, 0], 10)); //==> [-20, -20, -20]
 // console.log('evenOddTransform2: ', evenOddTransform([1, 2, 3], 1)); //==> [3, 0, 5]
 
 
@@ -499,13 +514,33 @@ function evenOddTransform(arr, n) {
 
 
 function removeMiddle(str) {
+//   if (!str.length % 2 || str.length < 4) {
+//     return 'invalid input'
+//   }
+// //angels
+//   var first = (str.length)/2 - 1;
+//   var second = str.lengh/2; //length 
 
-  if (!str.length % 2 || str.length < 4) {
+//   var resStr = '';
+
+//   for  (var i = 0; i < str.length; i ++) {
+//     if (i !== first && i !== second) {
+//       console.log('str[i]', str[i], i)
+//       resStr += str[i];
+//     }
+//     // if (i !== second) {
+//     //   resStr += str[i]
+//     // }
+
+  
+//   }
+  //(NOT(NOT(0)) => odd
+  if (!(!(str.length % 2)) || str.length < 4) {
     return 'invalid input'
   }
 //angels
-  var first = (str.length)/2 - 1;
-  var second = str.lengh/2;
+  var first = (str.length)/2 - 1; //n
+  var second = str.length/2;
 
   var resStr = '';
 
@@ -517,16 +552,17 @@ function removeMiddle(str) {
     // if (i !== second) {
     //   resStr += str[i]
     // }
-  }
 
+  
+  }
   return resStr;
 }
 
-// console.log('intermediate 1a: ', removeMiddle('angels')); // ==> 'anls';
+console.log('intermediate 1a: ', removeMiddle('angels')); // ==> 'anls';
 
-// console.log('intermediate 1b:', removeMiddle('hotel')); //==> 'invalid input'
+console.log('intermediate 1b:', removeMiddle('hotel')); //==> 'invalid input'
 
-// console.log('intermediate 1c: ', removeMiddle('at')); //  ==> 'invalid input'
+console.log('intermediate 1c: ', removeMiddle('at')); //  ==> 'invalid input'
 
 
 
