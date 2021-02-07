@@ -756,22 +756,38 @@ console.log('assert2: ', assertEqual(actual2, expected2));
 //Who's The Oldest?
 
 
-// Given an object containing the names and ages of a group of people, return the name of the  person.
+// Given an object containing the names and ages of a group of people, return the name of the oldest person.
 
 
 // Notes
 // All ages will be different.
 
 function oldest(people) {
-	var oldest;
+	// var oldest;//the name , it is a string
+	// for (var key in people) {
+	// 	if (oldest === undefined) {
+	// 		oldest = key; 
+	// 	} else {
+	// 		if ( people < people[key]) { //people should be people[oldest] and if should be moved to create "else if"
+	// 			 oldest = key;
+	// 		}
+	// 	}
+	// }
+	// return oldest;
+
+	var oldest;//the name , it is a string
+  
 	for (var key in people) {
+
+    
+
 		if (oldest === undefined) {
-			oldest = key; 
-		} else {
-			if ( people < people[key]) {
+			oldest = key;
+      
+		} else if ( people[oldest] < people[key]) {
 				 oldest = key;
 			}
-		}
+		
 	}
 	return oldest;
 }
@@ -801,19 +817,19 @@ var assertOldest = function(actual, expected) {
 }
 
 // ///////running the tests
-// console.log('assertOldest1: ', assertOldest(oldest({
-//   Emma: 71,
-//   Jack: 45,
-//   Amy: 15,
-//   Ben: 29,
-// }), 'Emma'));
+console.log('assertOldest1: ', assertOldest(oldest({
+  Emma: 71,
+  Jack: 45,
+  Amy: 15,
+  Ben: 29,
+}), 'Emma'));
 
-// console.log('assertOldest1: ', assertOldest(oldest({
-//   Max: 9,
-//   Josh: 13,
-//   Sam: 48,
-//   Anne: 33,
-// }), 'Sam'));
+console.log('assertOldest1: ', assertOldest(oldest({
+  Max: 9,
+  Josh: 13,
+  Sam: 48,
+  Anne: 33,
+}), 'Sam'));
 
 
 
